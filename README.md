@@ -77,4 +77,15 @@ La API provee los siguientes endpoints:
 - Capacidad para trabajar con documentación externa
 - Capacidad de investigación y resolución de problemas
 ---
+
+## 🖼️ Anexos
+
 API: http://3.21.37.135:8000/docs
+
+A continuación se muestra un ejemplo de cómo debería verse el formulario de registro:
+
+![Formulario de registro]([https://pruebatecnica-gruporq-frontend.s3.us-east-2.amazonaws.com/registro.jpg](https://pruebatecnica-gruporq-frontend.s3.us-east-2.amazonaws.com/registro.jpg))
+
+A continuación se muestra un ejemplo de cómo debería verse el formulario de login:
+
+![Formulario de login]([https://pruebatecnica-gruporq-frontend.s3.us-east-2.amazonaws.com/registro.jpg](https://pruebatecnica-gruporq-frontend.s3.us-east-2.amazonaws.com/login.png))

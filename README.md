@@ -77,3 +77,4 @@ La API provee los siguientes endpoints:
 - Capacidad para trabajar con documentación externa
 - Capacidad de investigación y resolución de problemas
 ---
+API: http://3.21.37.135:8000/docs

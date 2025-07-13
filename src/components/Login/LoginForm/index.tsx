@@ -1,7 +1,7 @@
 "use client";
-
 import ForgotPassword from "../ForgotPassword";
 import Recaptcha from "../Recaptcha";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import style from "./style.module.css";
 
@@ -9,10 +9,12 @@ export default function Form() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const router = useRouter();
+
   function sendData(e: React.FormEvent<HTMLFormElement>) {
     if (!email || !password) {
       console.log("todos los campos son necesarios");
-      return
+      return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -28,6 +30,7 @@ export default function Form() {
       password,
     };
     console.log(credentials);
+    router.push("/");
   }
 
   return (

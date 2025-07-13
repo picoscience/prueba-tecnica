@@ -10,6 +10,17 @@ export default function Form() {
   const [password, setPassword] = useState<string>("");
 
   function sendData(e: React.FormEvent<HTMLFormElement>) {
+    if (!email || !password) {
+      console.log("todos los campos son necesarios");
+      return
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      alert("Correo electrónico inválido.");
+      return;
+    }
     e.preventDefault();
     //fetch
     const credentials = {

@@ -23,6 +23,12 @@ export default function Form() {
       alert("Correo electrónico inválido.");
       return;
     }
+
+    if (password.length < 6) {
+      alert("Contraseña demasiado corta.");
+      return;
+    }
+
     e.preventDefault();
     //fetch
     const credentials = {
@@ -34,7 +40,7 @@ export default function Form() {
   }
 
   return (
-    <form action="" className={style.form} onSubmit={sendData}>
+    <form className={style.form} onSubmit={sendData}>
       <div className={style.divInputs}>
         <label htmlFor="email" className={style.label}>
           Correo Electronico

@@ -8,7 +8,6 @@ import style from "./style.module.css";
 export default function Form() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  // const [token, setToken] = useState<string>(""); //testing
 
   const router = useRouter();
 
@@ -43,7 +42,6 @@ export default function Form() {
       "nbWFpbC5jb20iLCJpYXQiOjE3MDAwMDAwMDB9Zp3UvGKhk3G1ekN3UJm2z6yH6ybjZchX3QezqgqAlvU";
 
     localStorage.setItem("token", fakeToken);
-    // setToken(fakeToken);
     // localStorage.clear()
 
     router.push("/");

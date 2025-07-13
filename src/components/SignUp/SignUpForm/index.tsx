@@ -1,17 +1,18 @@
 "use client";
 import ConsentCheckbox from "../ConsentCheckbox";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import style from "./style.module.css";
 
 interface userFormData {
-  identification_type_id: string;
-  identification_number: number;
+  identification_type_id: number;
+  identification_number: string;
   identification_expedition: string;
-  gender_id: string;
+  gender_id: number;
   birth_date: string;
   name: string;
-  marital_status_id: string;
-  phone_number: number;
+  marital_status_id: number;
+  phone_number: string;
   address: string;
   campaing: string;
   supervisor: string;
@@ -22,14 +23,14 @@ interface userFormData {
 
 export default function SignUpForm() {
   const [data, setData] = useState<userFormData>({
-    identification_type_id: "",
-    identification_number: 0,
+    identification_type_id: 0,
+    identification_number: "",
     identification_expedition: "",
-    gender_id: "",
+    gender_id: 0,
     birth_date: "",
     name: "",
-    marital_status_id: "",
-    phone_number: 0,
+    marital_status_id: 0,
+    phone_number: "",
     address: "",
     campaing: "",
     supervisor: "",
@@ -38,10 +39,11 @@ export default function SignUpForm() {
     confirmPassword: "",
   });
 
-  // function sendData(e: React.FormEvent<HTMLFormElement>) {
-  //   e.preventDefault();
-  //   console.log(data);
-  // }
+  const router = useRouter();
+
+  // useEffect(() => {
+  //   localStorage.clear
+  // });
 
   function validateData() {
     if (data.password !== data.confirmPassword) {
@@ -119,7 +121,8 @@ export default function SignUpForm() {
 
       const resdata = await response.json();
       console.log("Registro exitoso:", resdata);
-      localStorage.setItem("token", resdata.data.item.access_token);
+      localStorage.setItem("token", resdata.item.access_token);
+      router.push("/");
     } catch (error: any) {
       console.error("Error en el registro:", error.message);
     }
@@ -152,13 +155,13 @@ export default function SignUpForm() {
         className={style.input}
         value={data.identification_type_id}
         onChange={(e) =>
-          setData({ ...data, identification_type_id: e.target.value })
+          setData({ ...data, identification_type_id: Number(e.target.value)})
         }
       >
-        <option value="">Selecciona una opción</option>
-        <option value="CC">Cédula de Ciudadanía</option>
-        <option value="TI">Tarjeta de Identidad</option>
-        <option value="CE">Cédula de Extranjería</option>
+        <option value="0">Selecciona una opción</option>
+        <option value="1">Cédula de Ciudadanía</option>
+        <option value="2">Tarjeta de Identidad</option>
+        <option value="3">Cédula de Extranjería</option>
       </select>
 
       <label className={style.label} htmlFor="identification_number">
@@ -170,7 +173,7 @@ export default function SignUpForm() {
         className={style.input}
         value={data.identification_number}
         onChange={(e) =>
-          setData({ ...data, identification_number: Number(e.target.value) })
+          setData({ ...data, identification_number: (e.target.value) })
         }
       />
 
@@ -205,12 +208,12 @@ export default function SignUpForm() {
         id="gender_id"
         className={style.input}
         value={data.gender_id}
-        onChange={(e) => setData({ ...data, gender_id: e.target.value })}
+        onChange={(e) => setData({ ...data, gender_id: Number(e.target.value) })}
       >
-        <option value="">Selecciona una opción</option>
-        <option value="Masculino">Masculino</option>
-        <option value="Femenino">Femenino</option>
-        <option value="Otro">Prefiero no decir</option>
+        <option value="0">Selecciona una opción</option>
+        <option value="1">Masculino</option>
+        <option value="2">Femenino</option>
+        <option value="3">Prefiero no decir</option>
       </select>
 
       <label className={style.label} htmlFor="marital_status_id">
@@ -221,13 +224,13 @@ export default function SignUpForm() {
         className={style.input}
         value={data.marital_status_id}
         onChange={(e) =>
-          setData({ ...data, marital_status_id: e.target.value })
+          setData({ ...data, marital_status_id: Number(e.target.value) })
         }
       >
-        <option value="">Selecciona una opción</option>
-        <option value="Soltero">Soltero</option>
-        <option value="Casado">Casado</option>
-        <option value="Divorciado">Divorciado</option>
+        <option value="0">Selecciona una opción</option>
+        <option value="1">Soltero</option>
+        <option value="2">Casado</option>
+        <option value="3">Divorciado</option>
       </select>
 
       <label className={style.label} htmlFor="phone_number">
@@ -239,7 +242,7 @@ export default function SignUpForm() {
         className={style.input}
         value={data.phone_number}
         onChange={(e) =>
-          setData({ ...data, phone_number: Number(e.target.value) })
+          setData({ ...data, phone_number:(e.target.value) })
         }
       />
 

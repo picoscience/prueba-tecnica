@@ -1,4 +1,3 @@
-import Message from "@/components/Home/Message/index";
 import Header from "@/components/Header/index";
 import Register from "@/components/Login/Register";
 import LoginForm from "@/components/Login/LoginForm";
@@ -27,7 +26,6 @@ export default function Home() {
         </div>
       </main>
       <Footer />
-      {/* <Message /> */}
     </div>
   );
 }

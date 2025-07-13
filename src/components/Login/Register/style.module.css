@@ -4,5 +4,5 @@
 }
 
 .a {
-    color: #2964fa;
+    color: var(--color-link);
 }

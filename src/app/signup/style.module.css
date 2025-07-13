@@ -1,0 +1,27 @@
+.generalDiv {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--grey-color);
+}
+
+.div {
+  width: 400px;
+  padding: 10px;
+  height: auto;
+  background-color: var(--whithe-color);
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.divTitle {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0px;
+}
+
+.title {
+  color: var(--dark-brown);
+  font-size: 1.4rem;
+}

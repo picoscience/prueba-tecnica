@@ -45,7 +45,7 @@ export default function SignUpForm() {
   //   localStorage.clear
   // });
 
-  function validateData() {
+  function validationData() {
     if (data.password !== data.confirmPassword) {
       alert("las contraseñas no coinciden");
       return;
@@ -133,7 +133,7 @@ export default function SignUpForm() {
       className={style.form}
       onSubmit={(e) => {
         e.preventDefault();
-        validateData();
+        validationData();
       }}
     >
       <label className={style.label} htmlFor="name">

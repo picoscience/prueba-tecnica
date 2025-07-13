@@ -11,7 +11,7 @@ export default function Form() {
 
   const router = useRouter();
 
-  function sendData(e: React.FormEvent<HTMLFormElement>) {
+  function validationData(e: React.FormEvent<HTMLFormElement>) {
     if (!email || !password) {
       console.log("Todos los campos son necesarios");
       return;
@@ -29,26 +29,59 @@ export default function Form() {
       return;
     }
 
-    e.preventDefault();
     //fetch
     const credentials = {
       email,
       password,
     };
     console.log(credentials);
+    sendData()
+  }
 
-    // testing
-    const fakeToken =
-      "nbWFpbC5jb20iLCJpYXQiOjE3MDAwMDAwMDB9Zp3UvGKhk3G1ekN3UJm2z6yH6ybjZchX3QezqgqAlvU";
+  async function sendData() {
+    const jsonData = {
+      grant_type: "password",
+      username: email,
+      password: password,
+      scope: "",
+      client_id: "",
+      client_secret: "",
+    };
 
-    localStorage.setItem("token", fakeToken);
-    // localStorage.clear()
+    try {
+      const response = await fetch(
+        "http://3.21.37.135:8000/core/token",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams(jsonData as any).toString(),
+        }
+      );
 
-    router.push("/");
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || "Error al registrarse");
+      }
+
+      const resdata = await response.json();
+      console.log("Registro exitoso:", resdata);
+      localStorage.setItem("token", resdata.item.access_token);
+      router.push("/");
+    } catch (error: any) {
+      console.error("Error en el registro:", error.message);
+    }
   }
 
   return (
-    <form className={style.form} onSubmit={sendData}>
+    <form
+      className={style.form}
+      onSubmit={(e) => {
+        e.preventDefault();
+        validationData(e);
+      }}
+    >
       <div className={style.divInputs}>
         <label htmlFor="email" className={style.label}>
           Correo Electronico

@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  justify-content: center;
+  background-color: var(--whithe-color);
+  width: 100vw;
+}
+
+.imgDiv {
+  width: 700px;
+}
+
+.img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}

@@ -1,4 +1,50 @@
-.page {
+.generalDiv {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--grey-color);
+}
+
+.main {
+  max-width: 700px;
+  display: flex;
+  gap: 32px;
+  flex: 1;
+  justify-content: center;
+  background-color: var(--grey-color);
+}
+
+.title {
+  color: var(--light-brown);
+  font-size: 1.4rem;
+}
+
+.divForm {
+  width: 330px;
+  height: auto;
+  background-color: var(--whithe-color);
+  border-radius: 5px;
+  margin: 10px 0px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px;
+  gap: 20px;
+}
+
+.divInfo {
+  width: 330px;
+  height: auto;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .page {
   --gray-rgb: 0, 0, 0;
   --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
   --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
@@ -14,9 +60,9 @@
   padding: 80px;
   gap: 64px;
   font-family: var(--font-geist-sans);
-}
+} */
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   .page {
     --gray-rgb: 255, 255, 255;
     --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
@@ -25,16 +71,9 @@
     --button-primary-hover: #ccc;
     --button-secondary-hover: #1a1a1a;
   }
-}
+} */
 
-.main {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  grid-row-start: 2;
-}
-
-.main ol {
+/* .main ol {
   font-family: var(--font-geist-mono);
   padding-left: 0;
   margin: 0;
@@ -106,10 +145,10 @@ a.secondary {
 
 .footer img {
   flex-shrink: 0;
-}
+} */
 
 /* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
+/* @media (hover: hover) and (pointer: fine) {
   a.primary:hover {
     background: var(--button-primary-hover);
     border-color: transparent;
@@ -165,4 +204,4 @@ a.secondary {
   .logo {
     filter: invert();
   }
-}
+} */

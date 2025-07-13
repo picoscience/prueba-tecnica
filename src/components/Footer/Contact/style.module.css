@@ -1,0 +1,9 @@
+.svg {
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+}
+
+.a {
+    color: var(--black-color);
+}

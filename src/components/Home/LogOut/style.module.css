@@ -1,0 +1,14 @@
+.div {
+    background-color: var(--grey-color);
+    /* width: 200px; */
+    /* height: 100px; */
+}
+
+.button {
+    background-color: var(--whithe-color);
+    color: var(--dark-brown);
+    cursor: pointer;
+    padding: 10px;
+    border: 2px solid var(--dark-brown);
+    border-radius: 5px;
+}

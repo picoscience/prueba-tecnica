@@ -13,7 +13,7 @@ export default function Form() {
 
   function sendData(e: React.FormEvent<HTMLFormElement>) {
     if (!email || !password) {
-      console.log("todos los campos son necesarios");
+      console.log("Todos los campos son necesarios");
       return;
     }
 

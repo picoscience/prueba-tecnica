@@ -39,12 +39,50 @@ export default function SignUpForm() {
   });
 
   function sendData(e: React.FormEvent<HTMLFormElement>) {
-     e.preventDefault();
-    console.log(data)
+    e.preventDefault();
+    console.log(data);
+  }
+
+  function validateData() {
+    if (data.password !== data.confirmPassword) {
+      alert("las contraseñas no coinciden");
+      return;
+    }
+
+    if (data.password.length < 6) {
+      console.log("La contraseña es demasiado corta");
+      return;
+    }
+
+    if (
+      !data.name ||
+      !data.identificationType ||
+      !data.identificationNumber ||
+      !data.birthDate ||
+      !data.issueDate ||
+      !data.gender ||
+      !data.maritalStatus ||
+      !data.phone ||
+      !data.campaign ||
+      !data.address ||
+      !data.supervisor ||
+      !data.email ||
+      !data.password ||
+      !data.password ||
+      !data.confirmPassword
+    ) {
+      alert("Todos los campos son necesarios");
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(data.email)) {
+      alert("Correo electrónico inválido.");
+      return;
+    }
   }
 
   return (
-       <form className={style.form} onSubmit={sendData}>
+    <form className={style.form} onSubmit={sendData}>
       <label className={style.label}>Nombre Completo</label>
       <input
         type="text"
@@ -57,7 +95,9 @@ export default function SignUpForm() {
       <select
         className={style.input}
         value={data.identificationType}
-        onChange={(e) => setData({ ...data, identificationType: e.target.value })}
+        onChange={(e) =>
+          setData({ ...data, identificationType: e.target.value })
+        }
       >
         <option value="">Selecciona una opción</option>
         <option value="CC">Cédula de Ciudadanía</option>
@@ -70,7 +110,9 @@ export default function SignUpForm() {
         type="number"
         className={style.input}
         value={data.identificationNumber}
-        onChange={(e) => setData({ ...data, identificationNumber: Number(e.target.value) })}
+        onChange={(e) =>
+          setData({ ...data, identificationNumber: Number(e.target.value) })
+        }
       />
 
       <label className={style.label}>Fecha de Nacimiento</label>

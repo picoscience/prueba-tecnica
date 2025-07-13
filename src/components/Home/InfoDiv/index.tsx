@@ -44,13 +44,17 @@ export default function InfoDiv() {
   return (
     <>
       {resData ? (
-        <div className={style.divInfo} >
-          <h2>Información del Usuario</h2>
+        <div className={style.divInfo}>
+          <div className={style.divTitle} >
+            <h2 className={style.title} >Información del Usuario</h2>
+          </div>
           <p>User info Id: {resData.user_info_id}</p>
           <p>Email: {resData.email}</p>
           <p>Password haseada: {resData.hashed_password}</p>
           <p>USer id: {resData.id}</p>
-          <p>Tipo de identificacion: {resData.user_info.identification_type_id}</p>
+          <p>
+            Tipo de identificacion: {resData.user_info.identification_type_id}
+          </p>
           <p>address: {resData.user_info.address}</p>
           <p>Fecha de cumpleaños: {resData.user_info.birth_date}</p>
           <p>Campaña: {resData.user_info.campaing}</p>
@@ -58,7 +62,7 @@ export default function InfoDiv() {
         </div>
       ) : (
         <div>
-            <h1>El usuario no tiene informacion</h1>
+          <h1>El usuario no tiene informacion</h1>
         </div>
       )}
     </>

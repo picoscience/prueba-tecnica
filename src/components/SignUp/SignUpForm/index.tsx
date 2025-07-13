@@ -4,16 +4,16 @@ import { useState } from "react";
 import style from "./style.module.css";
 
 interface userFormData {
+  identification_type_id: string;
+  identification_number: number;
+  identification_expedition: string;
+  gender_id: string;
+  birth_date: string;
   name: string;
-  identificationType: string;
-  identificationNumber: number;
-  birthDate: string;
-  issueDate: string;
-  gender: string;
-  maritalStatus: string;
-  phone: number;
-  campaign: string;
+  marital_status_id: string;
+  phone_number: number;
   address: string;
+  campaing: string;
   supervisor: string;
   email: string;
   password: string;
@@ -22,26 +22,26 @@ interface userFormData {
 
 export default function SignUpForm() {
   const [data, setData] = useState<userFormData>({
+    identification_type_id: "",
+    identification_number: 0,
+    identification_expedition: "",
+    gender_id: "",
+    birth_date: "",
     name: "",
-    identificationType: "",
-    identificationNumber: 0,
-    birthDate: "",
-    issueDate: "",
-    gender: "",
-    maritalStatus: "",
-    phone: 0,
-    campaign: "",
+    marital_status_id: "",
+    phone_number: 0,
     address: "",
+    campaing: "",
     supervisor: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
 
-  function sendData(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    console.log(data);
-  }
+  // function sendData(e: React.FormEvent<HTMLFormElement>) {
+  //   e.preventDefault();
+  //   console.log(data);
+  // }
 
   function validateData() {
     if (data.password !== data.confirmPassword) {
@@ -53,25 +53,25 @@ export default function SignUpForm() {
       console.log("La contraseña es demasiado corta");
       return;
     }
-
+    //implementar un bucle
     if (
+      !data.identification_type_id ||
+      !data.identification_number ||
+      !data.identification_expedition ||
+      !data.gender_id ||
+      !data.birth_date ||
       !data.name ||
-      !data.identificationType ||
-      !data.identificationNumber ||
-      !data.birthDate ||
-      !data.issueDate ||
-      !data.gender ||
-      !data.maritalStatus ||
-      !data.phone ||
-      !data.campaign ||
+      !data.marital_status_id ||
+      !data.phone_number ||
       !data.address ||
+      !data.campaing ||
       !data.supervisor ||
       !data.email ||
-      !data.password ||
       !data.password ||
       !data.confirmPassword
     ) {
       alert("Todos los campos son necesarios");
+      return;
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -79,24 +79,80 @@ export default function SignUpForm() {
       alert("Correo electrónico inválido.");
       return;
     }
+
+    sendData();
+  }
+
+  async function sendData() {
+    const jsonData = {
+      identification_type_id: data.identification_type_id,
+      identification_number: data.identification_number,
+      identification_expedition: data.identification_expedition,
+      gender_id: data.gender_id,
+      birth_date: data.birth_date,
+      name: data.name,
+      marital_status_id: data.marital_status_id,
+      phone_number: data.phone_number,
+      address: data.address,
+      campaing: data.campaing,
+      supervisor: data.supervisor,
+      email: data.email,
+      password: data.password,
+    };
+
+    try {
+      const response = await fetch(
+        "http://3.21.37.135:8000/core/api/v1/user_infos/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(jsonData),
+        }
+      );
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || "Error al registrarse");
+      }
+
+      const resdata = await response.json();
+      console.log("Registro exitoso:", resdata);
+      localStorage.setItem("token", resdata.data.item.access_token);
+    } catch (error: any) {
+      console.error("Error en el registro:", error.message);
+    }
   }
 
   return (
-    <form className={style.form} onSubmit={sendData}>
-      <label className={style.label}>Nombre Completo</label>
+    <form
+      className={style.form}
+      onSubmit={(e) => {
+        e.preventDefault();
+        validateData();
+      }}
+    >
+      <label className={style.label} htmlFor="name">
+        Nombre Completo
+      </label>
       <input
+        id="name"
         type="text"
         className={style.input}
         value={data.name}
         onChange={(e) => setData({ ...data, name: e.target.value })}
       />
 
-      <label className={style.label}>Tipo de Identificacion</label>
+      <label className={style.label} htmlFor="identification_type_id">
+        Tipo de Identificacion
+      </label>
       <select
+        id="identification_type_id"
         className={style.input}
-        value={data.identificationType}
+        value={data.identification_type_id}
         onChange={(e) =>
-          setData({ ...data, identificationType: e.target.value })
+          setData({ ...data, identification_type_id: e.target.value })
         }
       >
         <option value="">Selecciona una opción</option>
@@ -105,37 +161,51 @@ export default function SignUpForm() {
         <option value="CE">Cédula de Extranjería</option>
       </select>
 
-      <label className={style.label}>Número de Identificación</label>
+      <label className={style.label} htmlFor="identification_number">
+        Número de Identificación
+      </label>
       <input
+        id="identification_number"
         type="number"
         className={style.input}
-        value={data.identificationNumber}
+        value={data.identification_number}
         onChange={(e) =>
-          setData({ ...data, identificationNumber: Number(e.target.value) })
+          setData({ ...data, identification_number: Number(e.target.value) })
         }
       />
 
-      <label className={style.label}>Fecha de Nacimiento</label>
+      <label className={style.label} htmlFor="birth_date">
+        Fecha de Nacimiento
+      </label>
       <input
+        id="birth_date"
         type="date"
         className={style.input}
-        value={data.birthDate}
-        onChange={(e) => setData({ ...data, birthDate: e.target.value })}
+        value={data.birth_date}
+        onChange={(e) => setData({ ...data, birth_date: e.target.value })}
       />
 
-      <label className={style.label}>Fecha de Expedición</label>
+      <label className={style.label} htmlFor="identification_expedition">
+        Fecha de Expedición
+      </label>
       <input
+        id="identification_expedition"
         type="date"
         className={style.input}
-        value={data.issueDate}
-        onChange={(e) => setData({ ...data, issueDate: e.target.value })}
+        value={data.identification_expedition}
+        onChange={(e) =>
+          setData({ ...data, identification_expedition: e.target.value })
+        }
       />
 
-      <label className={style.label}>Género</label>
+      <label className={style.label} htmlFor="gender_id">
+        Género
+      </label>
       <select
+        id="gender_id"
         className={style.input}
-        value={data.gender}
-        onChange={(e) => setData({ ...data, gender: e.target.value })}
+        value={data.gender_id}
+        onChange={(e) => setData({ ...data, gender_id: e.target.value })}
       >
         <option value="">Selecciona una opción</option>
         <option value="Masculino">Masculino</option>
@@ -143,11 +213,16 @@ export default function SignUpForm() {
         <option value="Otro">Prefiero no decir</option>
       </select>
 
-      <label className={style.label}>Estado Civil</label>
+      <label className={style.label} htmlFor="marital_status_id">
+        Estado Civil
+      </label>
       <select
+        id="marital_status_id"
         className={style.input}
-        value={data.maritalStatus}
-        onChange={(e) => setData({ ...data, maritalStatus: e.target.value })}
+        value={data.marital_status_id}
+        onChange={(e) =>
+          setData({ ...data, marital_status_id: e.target.value })
+        }
       >
         <option value="">Selecciona una opción</option>
         <option value="Soltero">Soltero</option>
@@ -155,56 +230,79 @@ export default function SignUpForm() {
         <option value="Divorciado">Divorciado</option>
       </select>
 
-      <label className={style.label}>Teléfono</label>
+      <label className={style.label} htmlFor="phone_number">
+        Teléfono
+      </label>
       <input
+        id="phone_number"
         type="number"
         className={style.input}
-        value={data.phone}
-        onChange={(e) => setData({ ...data, phone: Number(e.target.value) })}
+        value={data.phone_number}
+        onChange={(e) =>
+          setData({ ...data, phone_number: Number(e.target.value) })
+        }
       />
 
-      <label className={style.label}>Campaña</label>
+      <label className={style.label} htmlFor="campaing">
+        Campaña
+      </label>
       <input
+        id="campaing"
         type="text"
         className={style.input}
-        value={data.campaign}
-        onChange={(e) => setData({ ...data, campaign: e.target.value })}
+        value={data.campaing}
+        onChange={(e) => setData({ ...data, campaing: e.target.value })}
       />
 
-      <label className={style.label}>Dirección</label>
+      <label className={style.label} htmlFor="address">
+        Dirección
+      </label>
       <input
+        id="address"
         type="text"
         className={style.input}
         value={data.address}
         onChange={(e) => setData({ ...data, address: e.target.value })}
       />
 
-      <label className={style.label}>Supervisor</label>
+      <label className={style.label} htmlFor="supervisor">
+        Supervisor
+      </label>
       <input
+        id="supervisor"
         type="text"
         className={style.input}
         value={data.supervisor}
         onChange={(e) => setData({ ...data, supervisor: e.target.value })}
       />
 
-      <label className={style.label}>Correo Electrónico</label>
+      <label className={style.label} htmlFor="email">
+        Correo Electrónico
+      </label>
       <input
+        id="email"
         type="email"
         className={style.input}
         value={data.email}
         onChange={(e) => setData({ ...data, email: e.target.value })}
       />
 
-      <label className={style.label}>Contraseña</label>
+      <label className={style.label} htmlFor="password">
+        Contraseña
+      </label>
       <input
+        id="password"
         type="password"
         className={style.input}
         value={data.password}
         onChange={(e) => setData({ ...data, password: e.target.value })}
       />
 
-      <label className={style.label}>Confirmar Contraseña</label>
+      <label className={style.label} htmlFor="confirmPassword">
+        Confirmar Contraseña
+      </label>
       <input
+        id="confirmPassword"
         type="password"
         className={style.input}
         value={data.confirmPassword}

@@ -1,20 +1,52 @@
+"use client";
+
 import ForgotPassword from "../ForgotPassword";
 import Recaptcha from "../Recaptcha";
+import { useState } from "react";
 import style from "./style.module.css";
 
 export default function Form() {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  function sendData(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    //fetch
+    const credentials = {
+      email,
+      password,
+    };
+    console.log(credentials);
+  }
+
   return (
-    <form action="" className={style.form}>
+    <form action="" className={style.form} onSubmit={sendData}>
       <div className={style.divInputs}>
-        <label htmlFor="" className={style.label}>
+        <label htmlFor="email" className={style.label}>
           Correo Electronico
         </label>
-        <input type="email" className={style.input} />
+        <input
+          id="email"
+          type="email"
+          className={style.input}
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+        />
 
-        <label htmlFor="" className={style.label}>
+        <label htmlFor="password" className={style.label}>
           Contraseña
         </label>
-        <input type="password" className={style.input} />
+        <input
+          id="password"
+          type="password"
+          className={style.input}
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+        />
       </div>
       <div>
         <ForgotPassword />
@@ -23,7 +55,9 @@ export default function Form() {
         <Recaptcha />
       </div>
       <div>
-        <button className={style.button}>Ingresar</button>
+        <button className={style.button} type="submit">
+          Ingresar
+        </button>
       </div>
     </form>
   );

@@ -1,0 +1,19 @@
+.div {
+  width: 100%;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.serviciosDiv {
+  display: flex;
+  /* align-items: center; */
+  width: 100%;
+}
+
+.svg {
+  width: 20px;
+  height: 20px;
+object-fit: contain;
+}

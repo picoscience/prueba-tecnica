@@ -4,6 +4,7 @@ import LogOut from "@/components/Home/LogOut";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import style from "./page.module.css";
+import InfoDiv from "@/components/Home/InfoDiv";
 
 export default function Home() {
   const router = useRouter();
@@ -22,6 +23,7 @@ export default function Home() {
   return (
     <div className={style.generalDiv}>
       <Message />
+      <InfoDiv />
       <LogOut changeTokenStatus={changeTokenStatus} />
     </div>
   );

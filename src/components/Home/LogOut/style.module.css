@@ -1,0 +1,21 @@
+.div {
+  background-color: var(--grey-color);
+  /* width: 200px; */
+  /* height: 100px; */
+  margin: 20px;
+}
+
+.button {
+  background-color: var(--whithe-color);
+  color: var(--dark-brown);
+  cursor: pointer;
+  padding: 15px;
+  border: 2px solid var(--dark-brown);
+  border-radius: 5px;
+  transition: 0.5s;
+}
+
+.button:hover {
+    background-color: var(--dark-brown);
+    color: var(--whithe-color);
+}

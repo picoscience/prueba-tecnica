@@ -1,0 +1,16 @@
+.divInfo {
+    background-color: var(--whithe-color);
+    border-radius: 5px;
+    padding: 20px;
+    border: 2px solid var(--dark-brown);
+    box-shadow: 0 4px 12px var(--dark-brown);
+}
+
+.divTitle {
+    display: flex;
+    justify-content: center;
+}
+
+.title {
+    color: var(--dark-brown);
+}

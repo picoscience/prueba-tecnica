@@ -1,0 +1,20 @@
+.div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.imgDiv {
+    background-color: var(--whithe-color);
+    border-radius: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;    
+}
